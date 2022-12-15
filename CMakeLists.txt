@@ -146,9 +146,17 @@ if (SNDFILE_FOUND)
     target_link_libraries(quiet_encode_file quiet_static sndfile ${CMAKE_THREAD_LIBS_INIT})
     set(buildable_programs ${buildable_programs} quiet_encode_file)
 
+    add_executable(quiet_encode_stdout programs/encode_stdout.c)
+    target_link_libraries(quiet_encode_stdout quiet_static ${CMAKE_THREAD_LIBS_INIT})
+    set(buildable_programs ${buildable_programs} quiet_encode_stdout)
+
     add_executable(quiet_decode_file programs/decode_file.c)
     target_link_libraries(quiet_decode_file quiet_static sndfile ${CMAKE_THREAD_LIBS_INIT})
     set(buildable_programs ${buildable_programs} quiet_decode_file)
+
+    add_executable(quiet_decode_stdin programs/decode_stdin.c)
+    target_link_libraries(quiet_decode_stdin quiet_static ${CMAKE_THREAD_LIBS_INIT})
+    set(buildable_programs ${buildable_programs} quiet_decode_stdin)
 else()
     unset(SNDFILE CACHE)
     message(WARNING "

@@ -19,6 +19,8 @@ int encode_to_soundcard(FILE *input, quiet_encoder_options *opt) {
     size_t sample_buffer_size = 16384;
     quiet_portaudio_encoder *e = quiet_portaudio_encoder_create(opt, device, latency, sample_rate, sample_buffer_size);
 
+    quiet_portaudio_encoder_set_blocking(e, 0, 0);
+
     size_t read_buffer_size = 16384;
     uint8_t *read_buffer = malloc(read_buffer_size*sizeof(uint8_t));
     bool done = false;

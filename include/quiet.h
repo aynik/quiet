@@ -513,6 +513,19 @@ typedef struct {
     quiet_modulation_scheme_t header_mod_scheme;
 
     /**
+     * Maximum frame length
+     *
+     * This value controls the maximum length of the user-controlled
+     * section of the frame. There is overhead in starting new frames,
+     * and each frame performs its own CRC check which either accepts or
+     * rejects the frame. A frame begins with a synchronization section
+     * which the decoder uses to detect and lock on to the frame. Over time,
+     * the synchronization will drift, which makes shorter frames easier to
+     * decode than longer frames.
+     */
+    size_t frame_len;
+
+    /**
      * Enable debug mode on receiver
      *
      * In order for this flag to work, libquiet must be compiled in debug mode

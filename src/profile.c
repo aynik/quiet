@@ -234,6 +234,9 @@ decoder_options *decoder_profile(json_t *root, const char *profilename) {
             opt->header_mod_scheme = (quiet_modulation_scheme_t)liquid_getopt_str2mod(scheme);
         }
     }
+    if ((v = json_object_get(profile, "frame_length"))) {
+        opt->frame_len = json_integer_value(v);
+    }
     if ((v = json_object_get(profile, "ofdm"))) {
         if (opt->encoding == gmsk_encoding) {
             free(opt);

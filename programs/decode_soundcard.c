@@ -30,10 +30,10 @@ int decode_from_soundcard(FILE *output, quiet_decoder_options *opt) {
 
     while (true) {
         ssize_t read = quiet_portaudio_decoder_recv(decoder, write_buffer, write_buffer_size);
-        if (read <= 0) {
+        fwrite(write_buffer, 1, read, output);
+        if (read < opt->frame_len) {
             break;
         }
-        fwrite(write_buffer, 1, read, output);
     }
 
     free(write_buffer);
